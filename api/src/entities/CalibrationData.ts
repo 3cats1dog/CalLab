@@ -13,7 +13,7 @@ import is from 'utils/validation';
 import { CalibrationDataType  } from 'constants/calibrationdata';
 import {  } from '.';
 
-@Entity({ name: 'tbcalibrationData', schema: 'public' })
+@Entity({ name: 'tbcalibrationdata', schema: 'public' })
 class CalibrationData extends BaseEntity implements IBaseEntityExtend {
   static validations = {
     title: [is.required(), is.maxLength(200)],

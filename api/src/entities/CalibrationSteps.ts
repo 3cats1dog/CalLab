@@ -22,7 +22,7 @@ import { CalibrationType, CalibrationStatus  } from 'constants/calibration';
 import { Procedure, Department, CustomerInstrument, Customer, Certicifate} from ".";
 */
 
-@Entity({ name: 'tbcalibrationSteps', schema: 'public' }  )
+@Entity({ name: 'tbcalibrationsteps', schema: 'public' }  )
 class CalibrationStep extends BaseEntity implements IBaseEntityExtend {
   static validations = {
     CalibrationId: is.required(),
