@@ -19,7 +19,7 @@ import is from 'utils/validation';
 import { Category,Customer,  Calibration } from '.';
 
 
-@Entity({ name: 'tbcustomerInstrument', schema: 'public' } )
+@Entity({ name: 'tbcustomerinstrument', schema: 'public' } )
 class CustomerInstrument extends BaseEntity implements IBaseEntityExtend {
   static validations = {
     Name: [is.required(), is.maxLength(200)],
