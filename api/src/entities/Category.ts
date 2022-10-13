@@ -14,7 +14,7 @@ import is from 'utils/validation';
 import { CustomerInstrument, Template, Procedure } from '.';
 
 
-@Entity({ name: 'tbInstrumentCategory', schema: 'public' } )
+@Entity({ name: 'tbinstrumentCategory', schema: 'public' } )
 class Category extends BaseEntity implements IBaseEntityExtend {
   static validations = {
     Name: [is.maxLength(255)],

@@ -49,7 +49,7 @@ module.exports = {
     new webpack.DefinePlugin({
       'process.env': {
         //NODE_ENV: JSON.stringify('production'),
-        API_URL: JSON.stringify('http://localhost:3000'),
+        API_URL: JSON.stringify('http://ec2-3-8-124-101.eu-west-2.compute.amazonaws.com:3000'),  //http://localhost:3000
       },
     }),
     new HtmlWebpackPlugin({

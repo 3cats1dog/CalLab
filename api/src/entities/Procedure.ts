@@ -19,7 +19,7 @@ import { SubProcedure, Category } from '.';
 //import { template } from 'lodash';
 
 
-@Entity({ name: 'tbProcedure', schema: 'public' }    ) 
+@Entity({ name: 'tbprocedure', schema: 'public' }    ) 
 class Procedure extends BaseEntity implements IBaseEntityExtend {
   static validations = {
     Name: [is.required(), is.maxLength(100)],

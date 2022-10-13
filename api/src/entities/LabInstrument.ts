@@ -13,7 +13,7 @@ import { IBaseEntityExtend } from 'entities';
 import is from 'utils/validation';
 
 
-@Entity({ name: 'tbLabInstrument', schema: 'public' }    )
+@Entity({ name: 'tblabinstrument', schema: 'public' }    )
 class LabInstrument extends BaseEntity implements IBaseEntityExtend {
   static validations = {
     Name: [is.required(), is.maxLength(200)],

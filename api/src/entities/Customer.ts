@@ -15,7 +15,7 @@ import {CustomerInstrument, Calibration } from '.';
 
  
 
-@Entity({ name: 'tbCustomer', schema: 'public' })
+@Entity({ name: 'tbcustomer', schema: 'public' })
 class Customer extends BaseEntity implements IBaseEntityExtend {
   static validations = {
     Name: [is.required(), is.maxLength(200)],

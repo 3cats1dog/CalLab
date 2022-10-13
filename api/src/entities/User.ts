@@ -16,7 +16,7 @@ import is from 'utils/validation';
 import { Comment, Issue, Project } from '.';
 import { UserType } from 'constants/user';
 
-@Entity({ name: 'tbUser', schema: 'public' } )
+@Entity({ name: 'tbuser', schema: 'public' } )
 class User extends BaseEntity implements IBaseEntityExtend {
   static validations = {
     Name: [is.required(), is.maxLength(100)],

@@ -15,7 +15,7 @@ import is from 'utils/validation';
 import { SubProcedure } from '.';
 */
 
-@Entity({ name: 'tbDataType', schema: 'public'}  )
+@Entity({ name: 'tbdatatype', schema: 'public'}  )
 class DataType extends BaseEntity implements IBaseEntityExtend {
   static validations = {
     Name: [is.required(), is.maxLength(100)],

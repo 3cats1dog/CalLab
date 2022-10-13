@@ -10,7 +10,7 @@ import { authenticateUser } from 'middleware/authentication';
 import { handleError } from 'middleware/errors';
 import { RouteNotFoundError } from 'errors';
 
-import { attachPublicRoutes, attachPrivateRoutes } from './routes';
+import { attachPublicRoutes, attachPrivateRoutes } from 'routes';
 
 const establishDatabaseConnection = async (): Promise<void> => {
   try {

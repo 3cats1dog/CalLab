@@ -8,7 +8,8 @@
     "start": "cross-env NODE_OPTIONS='--tls-min-v1.0' nodemon --exec ts-node  --files src/index.ts",
     "start:test": "cross-env NODE_ENV='test' DB_DATABASE='jira_test' npm start",
     "start:production": "cross-env NODE_OPTIONS='--tls-min-v1.0' pm2 start --name 'jira_api' -f node -- -r ./tsconfig-paths.js build/index.js",
-    "build": "cd src && tsc",
+    "build": "cd src && tsc ",
+    "start:node":"node -r ./tsconfig-paths.js build/index.js",
     "pre-commit": "lint-staged"
   },
   "dependencies": {
@@ -32,6 +33,7 @@
     "@types/jsonapi-serializer": "^3.6.5",
     "@types/jsonwebtoken": "^8.5.9",
     "@types/lodash": "^4.14.185",
+    "@types/module-alias": "^2.0.1",
     "@types/node": "^18.7.18",
     "@typescript-eslint/eslint-plugin": "^5.37.0",
     "@typescript-eslint/parser": "^5.37.0",

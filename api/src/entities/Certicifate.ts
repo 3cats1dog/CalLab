@@ -14,7 +14,7 @@ import { IBaseEntityExtend } from 'entities';
 import is from 'utils/validation';
 
 
-@Entity({ name: 'tbCertificate', schema: 'public' }  )
+@Entity({ name: 'tbcertificate', schema: 'public' }  )
 class Certificate extends BaseEntity implements IBaseEntityExtend {
   static validations = {
     Address: [is.required(), is.maxLength(200)],

@@ -22,7 +22,7 @@ import { CalibrationType, CalibrationStatus  } from 'constants/calibration';
 */
 import { Template, Procedure} from "entities";
 
-@Entity({ name: 'tbTemplateDetail', schema: 'public' }   )
+@Entity({ name: 'tbtemplatedetail', schema: 'public' }   )
 class TemplateDetail extends BaseEntity implements IBaseEntityExtend {
   static validations = {
     //Name:is.required(),
