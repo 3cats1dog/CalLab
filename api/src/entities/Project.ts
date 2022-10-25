@@ -21,7 +21,7 @@ class Project extends BaseEntity implements IBaseEntityExtend  {
     category: [is.required(), is.oneOf(Object.values(ProjectCategory))],
   };
 
-  PrimaryColumnName = "id";
+  PrimaryColumnName (){ return  "id";}
 
   @PrimaryGeneratedColumn()
   id: number;

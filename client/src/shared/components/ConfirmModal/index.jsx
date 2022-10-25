@@ -12,6 +12,7 @@ const propTypes = {
   cancelText: PropTypes.string,
   onConfirm: PropTypes.func.isRequired,
   renderLink: PropTypes.func.isRequired,
+  isOpen:PropTypes.bool,
 };
 
 const defaultProps = {
@@ -21,6 +22,7 @@ const defaultProps = {
   message: 'Are you sure you want to continue with this action?',
   confirmText: 'Confirm',
   cancelText: 'Cancel',
+  isOpen:undefined,
 };
 
 const ConfirmModal = ({
@@ -32,6 +34,7 @@ const ConfirmModal = ({
   cancelText,
   onConfirm,
   renderLink,
+  isOpen,
 }) => {
   const [isWorking, setWorking] = useState(false);
 
@@ -51,6 +54,7 @@ const ConfirmModal = ({
       testid="modal:confirm"
       withCloseIcon={false}
       renderLink={renderLink}
+      isOpen={isOpen}
       renderContent={modal => (
         <Fragment>
           <Title>{title}</Title>

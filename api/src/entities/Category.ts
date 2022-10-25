@@ -21,7 +21,7 @@ class Category extends BaseEntity implements IBaseEntityExtend {
     Description: [is.maxLength(255)],
   };
 
-  PrimaryColumnName = "CategoryId";
+  PrimaryColumnName() {return  "CategoryId";}
 
   @PrimaryGeneratedColumn()
   CategoryId: number;

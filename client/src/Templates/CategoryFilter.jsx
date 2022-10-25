@@ -8,17 +8,13 @@ import 'shared/components/Form/customForm.css';
 
 const propTypes = {
   selectCategory:PropTypes.func.isRequired,
+  categoryList:PropTypes.array.isRequired,
   category:PropTypes.object,
 };
 
 
-const CategoryFilter = ( { selectCategory, category }) => {
+const CategoryFilter = ( { selectCategory, category, categoryList }) => {
 
-const [{data}, fetchCategory] = useApi.get(`/categorys`, { layz:true});
-
-const categoryList=get(data,"categorys", []);
-
- 
 
 const categoryOptions=categoryList.map(category =>({
     value: category.CategoryId,

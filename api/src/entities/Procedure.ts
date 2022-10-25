@@ -27,7 +27,7 @@ class Procedure extends BaseEntity implements IBaseEntityExtend {
     CategoryId:is.required(),
   };
 
-  PrimaryColumnName = "ProcedureId";
+  PrimaryColumnName(){ return  "ProcedureId";}
 
   @PrimaryGeneratedColumn()
   ProcedureId: number;

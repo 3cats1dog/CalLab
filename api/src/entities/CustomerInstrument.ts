@@ -28,7 +28,7 @@ class CustomerInstrument extends BaseEntity implements IBaseEntityExtend {
     SerialNo: [is.required(), is.maxLength(200)],
   };
 
-  PrimaryColumnName = "InstrumentId";
+  PrimaryColumnName() {return "InstrumentId";}
 
   @PrimaryGeneratedColumn()
   InstrumentId: number;

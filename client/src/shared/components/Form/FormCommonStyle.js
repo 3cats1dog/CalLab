@@ -35,14 +35,19 @@ export const FormElement_1_4 = styled.div`
   width:25%;
 `;
 
-
-export const Left = styled.div`
+export const Full = styled.div`
 width: 100%;
 padding-right: 50px;
 `;
 
+
+export const Left = styled.div`
+width: 50%;
+padding-right: 50px;
+`;
+
 export const Right = styled.div`
-width: 35%;
+width: 50%;
 padding-top: 5px;
 `;
 

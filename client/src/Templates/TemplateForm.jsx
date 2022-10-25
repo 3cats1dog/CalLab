@@ -1,6 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-
+import { Row, Col } from 'react-bootstrap';
 import toast from 'shared/utils/toast';
 import { Form, IssueTypeIcon, Icon, Avatar, IssuePriorityIcon } from 'shared/components';
 
@@ -42,20 +42,27 @@ const TemplateForm = ({ template, updateTemplate }) => {
       }}
     >
       <FormElement>
+        <Row>
+
         <Form.Field.Input
+          className="col-lg-6"
           name="Name"
           label="Name"
         />
         <Form.Field.Textarea
+          className="col-lg-6"
           name="Description"
           label="Description"
         />
-        <Divider />
+        </Row>
+        <Row>
         <Actions>
           <ActionButton type="submit" variant="primary" >
             Update Template
           </ActionButton>
         </Actions>
+        </Row>
+        <Divider />
       </FormElement>
     </Form>
   );

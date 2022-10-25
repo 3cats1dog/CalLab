@@ -51,6 +51,19 @@ export const getByCategory = catchErrors(async (req, res) => {
 });
 
 
+export const getByCalibration = catchErrors(async (req, res) => {
+
+  let whereSQL = ' CategoryId in (select CategoryId 	from kallab.tbcustomerinstrument 	where InstrumentId in 		(select InstrumentId 		from kallab.tbcalibration 		where CalibrationId=:calibrationId)	) ';
+  const templates = await Template.createQueryBuilder()
+  .select()
+  .where(whereSQL, { calibrationId: `${req.params.calibrationId}` })
+  .getMany();
+
+  res.respond({ templates });
+});
+
+
+
 
 export const create = catchErrors(async (req, res) => {
   const template = await createEntity(Template, req.body);

@@ -4,7 +4,7 @@ import { get } from 'lodash';
 import useApi from 'shared/hooks/api';
 import  api from 'shared/utils/api';
 import { PageError, PageLoader, CopyLinkButton, Button, AboutTooltip } from 'shared/components';
-import { TopActions, TopActionsRight, TopActionsLeft, Content, Left, Right } from 'shared/components/Form/FormCommonStyle';
+import { TopActions, TopActionsRight, TopActionsLeft, Content, Left, Right, Full } from 'shared/components/Form/FormCommonStyle';
 import Delete from './ProcedureDetailDelete';
 import ProcedureForm from './ProcedureForm';
 
@@ -19,6 +19,7 @@ const ProcedureDetails = ({
   modalClose,
   categroyList,
 }) => {
+  
   const [{ data, error ,setLocalData }, fetchProcedure] = useApi.get(`/procedures/${ProcedureId}`,  { lazy: true });
   //if (!data) return <Loader />;
   if (error) return <PageError />;
@@ -60,13 +61,13 @@ const ProcedureDetails = ({
         </TopActionsRight>
       </TopActions>
       <Content>
-        <Left>
+        <Full>
           <ProcedureForm
             procedure={procedure}
             updateProcedure={updateProcedure}
             categroyList={categroyList}
           />
-        </Left>
+        </Full>
       </Content>
     </Fragment>
   );

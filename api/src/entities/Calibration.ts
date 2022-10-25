@@ -28,7 +28,7 @@ class Calibration extends BaseEntity implements IBaseEntityExtend {
     Status: [is.required(), is.oneOf(Object.values(CalibrationStatus))],
   };
 
-  PrimaryColumnName = "CalibrationId";
+  PrimaryColumnName() { return "CalibrationId";}
 
   @PrimaryGeneratedColumn()
   CalibrationId: number;

@@ -1,4 +1,4 @@
-import { TemplateDetail } from 'entities';
+import { TemplateDetail, DataType } from 'entities';
 import { catchErrors } from 'errors';
 import { createEntity,validateAndSaveEntity } from 'utils/typeorm';
 
@@ -19,10 +19,19 @@ export const get = catchErrors(async (req, res) => {
 export const getByTemplate = catchErrors(async (req, res) => {
     const details = await TemplateDetail.find({
       where: {"TemplateId": Number(req.params.templateId)},
-      relations:["procedure"]
+      relations:["procedure", "subProcedure"],
     });  
     await delay(1000);
-    res.respond({details});
+    if (details.length>0)
+    {
+      const dataTypeId = details[0].procedure.DataTypeId;
+      const dataType = await DataType.findOne({where: {"DataTypeId" :dataTypeId }});
+      //console.log(dataType);
+      res.respond({details, dataType});
+      return;
+    }
+    
+    res.respond({details, dataType:{}});
   });
 
 export const create = catchErrors(async (req, res) => {
@@ -47,3 +56,12 @@ export const remove = catchErrors(async (req, res) => {
   }
   res.respond({ detail });
 });
+
+
+export const removeByProcedure = catchErrors(async (req, res) => {
+  const details = await TemplateDetail.find({where:{ "ProcedureId":Number(req.params.procedureId), "TemplateId":Number(req.params.templateId)}});
+  details.map(x=> x.remove());
+  res.respond({ "removeCount":details.length });
+});
+
+

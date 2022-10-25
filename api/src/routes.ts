@@ -54,10 +54,12 @@ export const attachPrivateRoutes = (app: any): void => {
   app.put('/calibrations/:calibrationId', calibrations.update);
   app.delete('/calibrations/:calibrationId', calibrations.remove);
 
-  app.get("/calibrationdatas", calibrationdatas.getCalibrationData);
+  app.get("/calibrationdatas/:dataId", calibrationdatas.get);
+  app.get("/calibrationdatas/step/:stepId", calibrationdatas.getByStep);
   app.post('/calibrationdatas', calibrationdatas.create);
-  app.put('/calibrationdatas/:calibrationDataId', calibrationdatas.update);
-  app.delete('/calibrationdatas/:calibrationDataId', calibrationdatas.remove);
+  app.put('/calibrationdatas/:dataId', calibrationdatas.update);
+  app.delete('/calibrationdatas/:dataId', calibrationdatas.remove);
+  app.delete('/calibrationdatas/step/:stepId', calibrationdatas.removeByStep);
 
   app.get('/categorys/:categoryId', categorys.get);
   app.get("/categorys", categorys.getcategorys);
@@ -91,6 +93,7 @@ export const attachPrivateRoutes = (app: any): void => {
   app.get('/procedures', procedures.getProcedure);
   app.get('/procedures/:procedureId', procedures.get);
   app.get('/procedures/category/:categoryId', procedures.getByCategory);
+  app.get('/procedures/calibration/:calibrationId', procedures.getByCalibration);
   app.post('/procedures', procedures.create);
   app.put('/procedures/:procedureId', procedures.update);
   app.delete('/procedures/:procedureId', procedures.remove);
@@ -102,16 +105,18 @@ export const attachPrivateRoutes = (app: any): void => {
   app.put('/subprocedures/:subProcedureId', subprocedures.update);
   app.delete('/subprocedures/:subProcedureId', subprocedures.remove);
 
-  app.get('/step/:stepId', step.get);
-  app.get('/step/calibration/:calibrationId', step.getByCalibration);
-  app.post('/step', step.create);
-  app.put('/step/:stepId', step.update);
-  app.delete('/step/:stepId', step.remove);
+  app.get('/steps/:stepId', step.get);
+  app.get('/steps/calibration/:calibrationId', step.getByCalibration);
+  app.post('/steps', step.create);
+  app.post('/steps/template', step.createByTemplate);
+  app.put('/steps/:stepId', step.update);
+  app.delete('/steps/:stepId', step.remove);
 
 
   app.get('/templates', template.getQuery);
   app.get('/templates/:templateId', template.get);
   app.get('/templates/category/:categoryId', template.getByCategory);
+  app.get('/templates/calibration/:calibrationId', template.getByCalibration);
   app.post('/templates', template.create);
   app.put('/templates/:templateId', template.update);
   app.delete('/templates/:templateId', template.remove);
@@ -121,6 +126,7 @@ export const attachPrivateRoutes = (app: any): void => {
   app.post('/templateDetails', templateDetail.create);
   app.put('/templateDetails/:detailId', templateDetail.update);
   app.delete('/templateDetails/:detailId', templateDetail.remove);
+  app.delete('/templateDetails/procedure/:templateId/:procedureId', templateDetail.removeByProcedure);
 
 
   app.get('/dataTypes/:dataTypeId', dataTypes.get);

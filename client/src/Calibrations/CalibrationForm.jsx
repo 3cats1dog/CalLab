@@ -3,6 +3,12 @@ import PropTypes from 'prop-types';
 
 import toast from 'shared/utils/toast';
 import { Form, IssueTypeIcon, Icon, Avatar, IssuePriorityIcon } from 'shared/components';
+import { 
+  CalibrationType, 
+  CalibrationStatus,
+  CalibrationTypeCopy,
+  CalibrationStatusCopy
+} from 'shared/constants/calibration'
 
 import {
   FormHeading,
@@ -20,6 +26,8 @@ const propTypes = {
 };
 
 const CalibrationForm = ({ calibration, updateCalibration }) => {
+
+
 
   return (
     <Form
@@ -47,14 +55,20 @@ const CalibrationForm = ({ calibration, updateCalibration }) => {
       }}
     >
       <FormElement>
-        <Form.Field.Input
+        <Form.Field.Select
           name="Type"
           label="Type"
+          options={typeOptions}
+          renderOption={renderType}
+          renderValue={renderType}
         />
         <Divider />
-        <Form.Field.Input
+        <Form.Field.Select
           name="Status"
           label="Status"
+          options={statusOptions}
+          renderOption={renderStatus}
+          renderValue={renderStatus}
         />
         <Form.Field.Textarea
           name="Remarks"
@@ -83,6 +97,28 @@ const CalibrationForm = ({ calibration, updateCalibration }) => {
   );
 };
 
+const typeOptions = Object.values(CalibrationType).map(type => ({
+  value: type,
+  label: CalibrationTypeCopy[type],
+}));
+
+const renderType = ({ value: type }) => (
+  <SelectItem>
+    <IssueTypeIcon type={type} top={1} />
+    <SelectItemLabel>{CalibrationTypeCopy[type]}</SelectItemLabel>
+  </SelectItem>
+);
+
+const statusOptions = Object.values(CalibrationStatus).map(status => ({
+  value: status,
+  label: CalibrationStatusCopy[status],
+}));
+
+const renderStatus = ({ value: status }) => (
+  <SelectItem>
+    <SelectItemLabel>{CalibrationStatusCopy[status]}</SelectItemLabel>
+  </SelectItem>
+);
 
 CalibrationForm.propTypes = propTypes;
 

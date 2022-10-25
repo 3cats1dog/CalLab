@@ -3,7 +3,7 @@ import PropTypes from 'prop-types';
 import useApi from 'shared/hooks/api';
 import { get } from 'lodash';
 import { DragDropContext, Draggable, Droppable } from 'react-beautiful-dnd';
-import  ProcedureCard from 'Procedures/ProcedureCard';
+import { ProcedureCard } from 'Procedures';
 
 const propTypes = {
  categoryId: PropTypes.number.isRequired,

@@ -39,7 +39,7 @@ const SubProcedureLists = ({ subprocedureList, filters }) => {
       renderCell: (params) => {
         const onClick = (e) => {
           e.stopPropagation(); // don't select this row after clicking
-          history.push(`${match.path}/subprocedures/${params.id}`);
+          history.push(`${match.path}/subprocedure/${params.id}`);
           return;
           const api  = params.api;
           const thisRow = {};

@@ -3,7 +3,7 @@ import PropTypes from 'prop-types';
 import { get } from 'lodash';
 import toast from 'shared/utils/toast';
 import useApi from 'shared/hooks/api';
-import { Form, Select, Icon, Avatar, IssuePriorityIcon } from 'shared/components';
+import { Form, IssueTypeIcon, Select, Icon, Avatar, IssuePriorityIcon } from 'shared/components';
 
 import {
 CalibrationType,
@@ -171,6 +171,7 @@ const typeOptions = Object.values(CalibrationType).map(type => ({
 
 const renderType = ({ value: type }) => (
   <SelectItem>
+    <IssueTypeIcon type={type} top={1} />
     <SelectItemLabel>{CalibrationTypeCopy[type]}</SelectItemLabel>
   </SelectItem>
 );

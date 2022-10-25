@@ -54,7 +54,7 @@ const ProcedureLists = ({ procedureList, filters, onSelected }) => {
       renderCell: (params) => {
         const onClick = (e) => {
           e.stopPropagation(); // don't select this row after clicking
-          history.push(`${match.path}/procedures/${params.id}`);
+          history.push(`${match.path}/procedure/${params.id}`);
           return;
           const api  = params.api;
           const thisRow = {};

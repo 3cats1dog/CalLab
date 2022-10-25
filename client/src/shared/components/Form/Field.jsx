@@ -13,7 +13,7 @@ import { StyledField, FieldLabel, FieldTip, FieldError } from './Styles';
 const propTypes = {
   className: PropTypes.string,
   label: PropTypes.string,
-  tip: PropTypes.string,
+  tip: PropTypes.oneOfType([PropTypes.string, PropTypes.object]),
   error: PropTypes.string,
   name: PropTypes.string,
 };

@@ -54,7 +54,7 @@ const TemplateLists = ({ templateList, filters, onSelected }) => {
         const onClick = (e) => {
           e.stopPropagation(); // don't select this row after clicking
           //history.push(`${match.path}/${params.id}`);
-          history.push(`/dashboard/template/${params.id}`);
+          history.push(`/template/${params.id}`);
           return;
           const api  = params.api;
           const thisRow = {};

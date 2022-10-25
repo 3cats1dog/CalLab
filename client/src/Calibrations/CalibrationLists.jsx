@@ -33,29 +33,31 @@ const CalibrationLists = ({ calibrationList, filters }) => {
   {
     const clickColumn =
     {
-      field: 'action',
+      field: 'action1',
       headerName: 'Edit',
       sortable: false,
       renderCell: (params) => {
-        const onClick = (e) => {
+        const onClick1 = (e) => {
           e.stopPropagation(); // don't select this row after clicking
           history.push(`${match.path}/${params.id}`);
-          return;
-          const api  = params.api;
-          const thisRow = {};
-
-          api
-            .getAllColumns()
-            .filter((c) => c.field !== '__check__' && !!c)
-            .forEach(
-              (c) => (thisRow[c.field] = params.getValue(params.id, c.field)),
-            );
-          return alert(JSON.stringify(thisRow, null, 4));
         };
-        return <Button onClick={onClick} >Edit</Button>;
+        return <Button onClick={onClick1} >Edit</Button>;
       },
     };
-    columns.unshift(clickColumn);
+    const startColumn =
+    {
+      field: 'action2',
+      headerName: 'Start',
+      sortable: false,
+      renderCell: (params) => {
+        const onClick2 = (e) => {
+          e.stopPropagation(); // don't select this row after clicking
+          history.push(`/start/${params.id}`);
+        };
+        return <Button onClick={onClick2} >Start</Button>;
+      },
+    };
+    columns.unshift(clickColumn, startColumn);
   }
 
   return (

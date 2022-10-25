@@ -1,14 +1,25 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 import { useHistory } from 'react-router-dom';
 import { Button, Form   } from "shared/components";
 import toast from 'shared/utils/toast';
 import api from 'shared/utils/api';
-import { getStoredAuthToken, storeAuthToken } from 'shared/utils/authToken';
+import { getStoredAuthToken, storeAuthToken, removeStoredAuthToken } from 'shared/utils/authToken';
 
 import { FormCont, FormElement } from "./Styles";
 
-const LoginForm =()=>{
+const propTypes = {
+  logout:PropTypes.bool,
+  setIsLogin:PropTypes.func.isRequired,
+};
+
+const LoginForm =({logout, setIsLogin})=>{
     const history = useHistory();
+    if (logout)
+    {
+      removeStoredAuthToken();
+      setIsLogin(false);
+    }
     return (
     <Form
       initialValues= {{
@@ -28,6 +39,7 @@ const LoginForm =()=>{
           }else{
             toast.success('Login successed');
             storeAuthToken(authToken);
+            setIsLogin(true);
             history.push('/');
           }
         } catch (error) {

@@ -20,7 +20,7 @@ class Certificate extends BaseEntity implements IBaseEntityExtend {
     Address: [is.required(), is.maxLength(200)],
   };
 
-  PrimaryColumnName = "CertificateId";
+  PrimaryColumnName() { return  "CertificateId";}
 
   @PrimaryGeneratedColumn()
   CertificateId: number;

@@ -22,7 +22,7 @@ const CustomerInstrumentDetailDelete = ({ customerInstrument,  modalClose }) => 
 
   return (
     <ConfirmModal
-      title={`Are you sure you want to delete this ınstrument? ${customerInstrument.Name}`}
+      title={`Are you sure you want to delete this instrument? ${customerInstrument.Name}`}
       message="Once you delete, it's gone for good."
       confirmText="Delete Instrument"
       onConfirm={handleCustomerInstrumentDelete}

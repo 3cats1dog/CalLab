@@ -18,7 +18,7 @@ class Department extends BaseEntity implements IBaseEntityExtend {
     Name: [is.required(), is.maxLength(200)],
   };
 
-  PrimaryColumnName = "DepartmentId";
+  PrimaryColumnName (){ return "DepartmentId";}
 
   @PrimaryGeneratedColumn()
   DepartmentId: number;

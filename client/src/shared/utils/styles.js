@@ -22,6 +22,7 @@ export const color = {
   backgroundLightest: '#F4F5F7',
   backgroundLightPrimary: '#D2E5FE',
   backgroundLightSuccess: '#E4FCEF',
+  backgroundLightTopMenu: '#e6ffed',
 
   borderLightest: '#dfe1e6',
   borderLight: '#C1C7D0',
@@ -60,6 +61,7 @@ export const sizes = {
   appNavBarLeftWidth: 64,
   secondarySideBarWidth: 230,
   minViewportWidth: 1000,
+  appSideBarWidth: 230,
 };
 
 export const zIndexValues = {

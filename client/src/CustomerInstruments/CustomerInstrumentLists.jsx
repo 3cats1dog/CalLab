@@ -38,7 +38,7 @@ const CustomerInstrumentLists = ({ instrumentlist, filters }) => {
       renderCell: (params) => {
         const onClick = (e) => {
           e.stopPropagation(); // don't select this row after clicking
-          history.push(`${match.path}/${params.id}`);
+          history.push(`${match.path}/instrument/${params.id}`);
           return;
           const api  = params.api;
           const thisRow = {};

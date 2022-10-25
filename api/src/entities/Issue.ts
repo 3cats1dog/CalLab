@@ -31,7 +31,7 @@ class Issue extends BaseEntity implements IBaseEntityExtend {
     reporterId: is.required(),
   };
 
-  PrimaryColumnName = "id";
+  PrimaryColumnName(){ return  "id";}
 
   @PrimaryGeneratedColumn()
   id: number;

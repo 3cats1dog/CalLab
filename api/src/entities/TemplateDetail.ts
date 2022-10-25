@@ -20,24 +20,27 @@ JoinColumn,
 OneToOne,
 import { CalibrationType, CalibrationStatus  } from 'constants/calibration';
 */
-import { Template, Procedure} from "entities";
+import { Template, Procedure, SubProcedure} from "entities";
 
-@Entity({ name: 'tbtemplatedetail', schema: 'public' }   )
+@Entity({ name: 'tbtemplatedetail', schema: 'public',orderBy: {
+  ProcedureId: "ASC",
+  SubProcedureId: "ASC",
+  Position: "ASC",
+}, }   )
 class TemplateDetail extends BaseEntity implements IBaseEntityExtend {
   static validations = {
     //Name:is.required(),
     TemplateId: is.required(),
     ProcedureId:is.required(),
+    SubProcedureId:is.required(),
+    NominalValue:is.required(),
     Position: is.required(),
   };
 
-  PrimaryColumnName = "TemplateDetailId";
+  PrimaryColumnName (){ return "TemplateDetailId";}
 
   @PrimaryGeneratedColumn()
   TemplateDetailId:number;
-
-  @Column('varchar', { nullable: true })
-  Name: string | null ;
 
   @Column('int')
   TemplateId: number;
@@ -46,7 +49,16 @@ class TemplateDetail extends BaseEntity implements IBaseEntityExtend {
   ProcedureId: number;
 
   @Column('int')
+  SubProcedureId: number;
+
+  @Column('float')
+  NominalValue: number;
+
+  @Column('int')
   Position: number;
+
+  @Column('int')
+  DataCount: number;
 
   @Column('text', { nullable: true })
   Description: string | null;
@@ -58,6 +70,10 @@ class TemplateDetail extends BaseEntity implements IBaseEntityExtend {
   @ManyToOne(()=>Procedure, procedure => procedure)
   @JoinColumn({ name: 'ProcedureId' })
   procedure:Procedure;
+
+  @ManyToOne(()=>SubProcedure, subProcedure => subProcedure)
+  @JoinColumn({ name: 'SubProcedureId' })
+  subProcedure:SubProcedure;
 
   @BeforeInsert()
   @BeforeUpdate()

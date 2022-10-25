@@ -3,8 +3,8 @@ import PropTypes from 'prop-types';
 import { get } from 'lodash';
 import useApi from 'shared/hooks/api';
 import  api from 'shared/utils/api';
-import { PageError, PageLoader, CopyLinkButton, Button, AboutTooltip } from 'shared/components';
-import { TopActions, TopActionsRight, TopActionsLeft, Content, Left, Right } from 'shared/components/Form/FormCommonStyle';
+import { PageError, PageLoader, CopyLinkButton, Button, AboutTooltip} from 'shared/components';
+import { TopActions, TopActionsRight, TopActionsLeft, Content, Left, Right, Full } from 'shared/components/Form/FormCommonStyle';
 import Delete from './SubProcedureDetailDelete';
 import SubProcedureForm from './SubProcedureForm';
 
@@ -58,12 +58,12 @@ const SubProcedureDetails = ({
         </TopActionsRight>
       </TopActions>
       <Content>
-        <Left>
+        <Full>
           <SubProcedureForm
             subprocedure={subprocedure}
             updateSubProcedure={updateSubProcedure}
           />
-        </Left>
+        </Full>
       </Content>
     </Fragment>
   );

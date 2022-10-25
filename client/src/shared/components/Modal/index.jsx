@@ -60,7 +60,8 @@ const Modal = ({
   useOnEscapeKeyDown(isOpen, closeModal);
 
   useEffect(() => {
-    document.body.style.overflow = 'hidden';
+    if (isOpen)
+      document.body.style.overflow = 'hidden';
 
     return () => {
       document.body.style.overflow = 'visible';

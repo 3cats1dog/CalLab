@@ -1,7 +1,21 @@
+import { Left } from 'Settings/Styles';
+import {IssueTypeIcon} from 'shared/components';
+
 export const columns  = [
-    {headerName :"Id",  field:'CalibrationId', sortable: true},
-    {headerName :"Type", field:'Type', sortable: true, width: 200},
-    {headerName :"Status", field:'Status', sortable: true, width: 200},
+    {headerName :"Id",  field:'CalibrationId', sortable: true, hide:true},
+    {headerName :"Type", field:'Type', sortable: true, width: 200,
+    renderCell: (params) => {
+      return <div className="rowitem">
+        <IssueTypeIcon type={params.row?.Type} top={1}  />
+        <label style={{ marginLeft: 5 }}>{CalibrationTypeCopy[params.row?.Type]}</label>
+        </div>;
+    }},
+    {headerName :"Status", field:'Status', sortable: true, width: 200,
+    renderCell: (params) => {
+      return <div className="rowitem">
+        {CalibrationStatusCopy[params.row?.Status]}
+        </div>;
+    }},
     {headerName :"Remarks", field:'Remarks', sortable: true, width: 200},
     {headerName :"CustomerReq", field:'CustomerReq', sortable: true, width: 200},
     {headerName :"DeviceReq", field:'DeviceReq', sortable: true, width: 200},
@@ -18,16 +32,18 @@ export const columns  = [
 
 
 export const CalibrationType = {
-    TASK: 'task',
-    BUG: 'bug',
-    STORY: 'story',
+    TASK: 'task', //icon type task
+    BUG: 'bug',   //icon type bug
+    STORY: 'story', //icon type story
   };
   
   export const CalibrationStatus = {
     BACKLOG: 'backlog',
-    SELECTED: 'selected',
+    CREATED: 'created',
     INPROGRESS: 'inprogress',
+    WAITEDIT: 'waitedit',
     DONE: 'done',
+    REPORTED:'reported',
   };
   
   export const CalibrationPriority = {
@@ -46,9 +62,11 @@ export const CalibrationType = {
   
   export const CalibrationStatusCopy = {
     [CalibrationStatus.BACKLOG]: 'Backlog',
-    [CalibrationStatus.SELECTED]: 'Selected for development',
+    [CalibrationStatus.CREATED]: 'Just create empty work',
     [CalibrationStatus.INPROGRESS]: 'In progress',
+    [CalibrationStatus.WAITEDIT]: 'Waiting definition',
     [CalibrationStatus.DONE]: 'Done',
+    [CalibrationStatus.REPORTED]: 'Done&Reported',
   };
   
   export const CalibrationPriorityCopy = {

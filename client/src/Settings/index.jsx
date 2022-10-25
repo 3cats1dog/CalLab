@@ -6,66 +6,28 @@ import useApi from 'shared/hooks/api';
 import { updateArrayItemById } from 'shared/utils/javascript';
 import { createQueryParamModalHelpers } from 'shared/utils/queryParamModal';
 import { Breadcrumbs, PageLoader, PageError, Modal } from 'shared/components';
-
-import CategoryBoard from 'Category';
-import ProcedureBoard from 'Procedures'; 
 import { Content, Left,Right, Full } from './Styles';
-import SubProcedureBoard from 'Procedures/SubProcedures';
 
 const SettingBoard = () => {
   const match = useRouteMatch();
   const history = useHistory();
-
-  const [{ data, error, isLoading }, fetchCategory] = useApi.get('/categorys',  { lazy: true });
-  const categroyList = get(data, 'categorys', []);
-
-  const [ categoryId, setCategory] =useState("");
-  const [ procedure, setProcedure] =useState({});
-  //{"ProcedureId":8, Name:"Default"}
 
   return (
     <Fragment>
       <Breadcrumbs items={['Ayarlar',  'Kapsam']} />
         <Content>
             <Left>
-                <CategoryBoard
-                showInsert={false}
-                onSelected={setCategory}
-                />
+              <h3>Left</h3>
             </Left>
             <Right>
-                <ProcedureBoard
-                showInsert={true}
-                categoryId={categoryId}
-                onSelected={setProcedure}
-                categroyList={categroyList}
-                />
+              <h3>Right</h3>
             </Right>
         </Content>
         <Content>
           <Full>
-            <SubProcedureBoard
-                showInsert={true}
-                procedure={procedure}
-              />
+            <h2>Content-Full</h2>
           </Full>
         </Content>
-
-      <Route
-        path={`${match.path}/settings/subprocedure/:subprocedureId`}
-        render={routeProps => (
-          <Modal
-            isOpen
-            testid="modal:customer-create"
-            width={1040}
-            withCloseIcon={false}
-            onClose={() => history.push(match.url)}
-            renderContent={modal => (
-                <h1>Sub Procedure</h1>
-            )}
-          />
-        )}
-      />      
     </Fragment>
   );
 };

@@ -1,9 +1,11 @@
-import React from 'react';
+import React, { Fragment } from 'react';
+import { NavLink,Route, useRouteMatch, useHistory } from 'react-router-dom';
 import PropTypes from 'prop-types';
 import { get } from 'lodash';
 import toast from 'shared/utils/toast';
 import useApi from 'shared/hooks/api';
-import { Form, Icon, Avatar, IssuePriorityIcon } from 'shared/components';
+import { Form, Modal, Icon, Avatar, IssuePriorityIcon } from 'shared/components';
+import { CustomerCreate } from 'Customers';
 
 import {
 TagType,
@@ -26,11 +28,19 @@ const propTypes = {
 };
 
 const CustomerInstrumentCreate = ({ onCreate, modalClose }) => {
+
+  const match = useRouteMatch();
+  const history = useHistory();
+
   const [{ isCreating }, createCustomerInstrument] = useApi.post('/customerInstruments');
-  const [fetchCustomer]=useApi.get('/customers', { lazy:true});
-  const [{data}, fetchCategory] = useApi.get('/categorys',  { lazy: true });
-  const categroyList = get(data, 'categorys', []);
-  const customerList=get(fetchCustomer.data, 'customers', []);
+  const [{data},fetchCustomer]=useApi.get('/customers', { lazy:true});
+  const [fetchCategory] = useApi.get('/categorys',  { lazy: true });
+  const categroyList = get(fetchCategory.data, 'categorys', []);
+  const customerList=get(data, 'customers', []);
+
+  const onCustomerCreate =()=>{
+    fetchCustomer();
+  };
 
   const customerOptions = customerList.map(customer => ({
     value: customer.CustomerId,
@@ -44,6 +54,8 @@ const CustomerInstrumentCreate = ({ onCreate, modalClose }) => {
   }));
 
   return (
+    <Fragment>
+
     <Form
       enableReinitialize
       initialValues={{
@@ -86,9 +98,10 @@ const CustomerInstrumentCreate = ({ onCreate, modalClose }) => {
         <Form.Field.Select
           name="CustomerId"
           label="Customer"
-          tip="Start typing to get a list of possible matches."
+          tip={<Fragment>Start typing to get a list of possible matches or use <NavLink id='testid-instr-create-customer' to={`${match.path}/createCustomer`}><i><b>Create new customer</b></i></NavLink> link </Fragment>}
           options={customerOptions}
         />
+        
         <Divider />
         <Form.Field.Input
           name="Name"
@@ -129,6 +142,27 @@ const CustomerInstrumentCreate = ({ onCreate, modalClose }) => {
         </Actions>
       </FormElement>
     </Form>
+
+    <Route
+        path={`${match.path}/createCustomer`}
+        render={() => (
+          <Modal
+            isOpen
+            testid="modal:customer-create"
+            width={1040}
+            withCloseIcon={false}
+            onClose={() => history.push(match.url)}
+            renderContent={modal => (
+              <CustomerCreate
+                onCreate={onCustomerCreate}
+                modalClose={modal.close}
+              />
+            )}
+          />
+        )}
+      />   
+    </Fragment>
+
   );
 };
 

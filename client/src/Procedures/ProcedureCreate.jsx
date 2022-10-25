@@ -15,6 +15,7 @@ import {
   Divider,
   Actions,
   ActionButton,
+  Full,
 } from 'shared/components/Form/FormCommonStyle';
 import { get } from 'lodash';
 
@@ -53,7 +54,7 @@ const ProcedureCreate = ({  modalClose, categoryId }) => {
       </TopActionsRight>
     </TopActions>
     <Content>
-      <Left>
+      <Full>
       <Form
       enableReinitialize
       initialValues={{
@@ -101,7 +102,7 @@ const ProcedureCreate = ({  modalClose, categoryId }) => {
         </Actions>
       </FormElement>
     </Form>
-     </Left>
+     </Full>
     </Content>
   </Fragment>
 

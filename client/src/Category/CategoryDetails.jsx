@@ -4,7 +4,7 @@ import { get } from 'lodash';
 import useApi from 'shared/hooks/api';
 import  api from 'shared/utils/api';
 import { PageError, PageLoader, CopyLinkButton, Button, AboutTooltip } from 'shared/components';
-import { TopActions, TopActionsRight, Content, Left, Right } from 'shared/components/Form/FormCommonStyle';
+import { TopActions, TopActionsRight, Content, Left, Right, Full } from 'shared/components/Form/FormCommonStyle';
 import Delete from './CategoryDetailDelete';
 import CategoryForm from './CategoryForm';
 
@@ -55,12 +55,12 @@ const CategoryDetails = ({
         </TopActionsRight>
       </TopActions>
       <Content>
-        <Left>
+        <Full>
           <CategoryForm
             category={category}
             updateCategory={updateCategory}
           />
-        </Left>
+        </Full>
       </Content>
     </Fragment>
   );

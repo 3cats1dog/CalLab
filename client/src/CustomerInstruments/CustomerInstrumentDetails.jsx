@@ -4,7 +4,7 @@ import { get } from 'lodash';
 import useApi from 'shared/hooks/api';
 import  api from 'shared/utils/api';
 import { PageError, PageLoader, CopyLinkButton, Button, AboutTooltip } from 'shared/components';
-import { TopActions, TopActionsRight, Content, Left, Right } from 'shared/components/Form/FormCommonStyle';
+import { TopActions, TopActionsRight, Content, Left, Right, Full } from 'shared/components/Form/FormCommonStyle';
 import Delete from './CustomerInstrumentDetailDelete';
 import CustomerInstrumentForm from './CustomerInstrumentForm';
 
@@ -55,12 +55,12 @@ const CustomerInstrumentDetails = ({
         </TopActionsRight>
       </TopActions>
       <Content>
-        <Left>
+        <Full>
           <CustomerInstrumentForm
             customerInstrument={customerInstrument}
             updateCustomerInstrument={updateCustomerInstrument}
           />
-        </Left>
+        </Full>
       </Content>
     </Fragment>
   );

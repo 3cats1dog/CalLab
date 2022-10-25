@@ -3,7 +3,7 @@ import { useHistory } from 'react-router-dom';
 
 import api from 'shared/utils/api';
 import toast from 'shared/utils/toast';
-import { getStoredAuthToken, storeAuthToken } from 'shared/utils/authToken';
+import { getStoredAuthToken, storeAuthToken, removeStoredAuthToken } from 'shared/utils/authToken';
 import { PageLoader } from 'shared/components';
 
 const Authenticate = () => {

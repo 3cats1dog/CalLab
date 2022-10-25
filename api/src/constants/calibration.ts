@@ -5,8 +5,10 @@ export enum CalibrationType {
   }
   
   export enum CalibrationStatus {
-    BACKLOG = 'backlog',
-    SELECTED = 'selected',
-    INPROGRESS = 'inprogress',
-    DONE = 'done',
+    BACKLOG= 'backlog',
+    CREATED= 'created',
+    INPROGRESS= 'inprogress',
+    WAITEDIT='waitedit',
+    DONE= 'done',
+    REPORTED='reported',
   }

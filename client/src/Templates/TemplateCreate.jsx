@@ -16,25 +16,21 @@ import {
   Actions,
   ActionButton,
   TopActionsLeft,
+  Full,
 } from  'shared/components/Form/FormCommonStyle';
 
   const propTypes = {
-    category: PropTypes.object.isRequired,
+    categoryList: PropTypes.array.isRequired,
     modalClose: PropTypes.func.isRequired,
   };
 
-  const TemplateCreate = ({  modalClose, category }) => {
+  const TemplateCreate = ({  modalClose, categoryList }) => {
 
   const [{ isCreating }, createTemplate] = useApi.post('/templates');
-  const [{data, isError }, fetchProcedure] = useApi.get(`/procedures/category/${category.CategoryId}`, { lazy:true});
 
-  const ProcedureList=get(data,"procedures", []);
-
-
-
-  const procedureOptions =ProcedureList.map(procedure => ({
-    value: procedure.ProcedureId,
-    label: procedure.Name,
+  const categoryOptions =categoryList.map(category => ({
+    value: category.CategoryId,
+    label: category.Name,
   }));
 
 
@@ -42,7 +38,7 @@ import {
     <Fragment>
     <TopActions>
       <TopActionsLeft>
-      {`Category: ${category.Name}`}
+      {`New Template`}
       </TopActionsLeft>
       <TopActionsRight>
         <AboutTooltip
@@ -57,23 +53,22 @@ import {
       </TopActionsRight>
     </TopActions>
     <Content>
-      <Left>
+      <Full>
       <Form
       enableReinitialize
       initialValues={{
         Name: '',
-        ProcedureList:'',
+        CategoryId:0,
         Description:'',
       }}
       validations={{
         Name: Form.is.required(),
-        ProcedureList:Form.is.required(),
+        CategoryId:Form.is.required(),
       }}
       onSubmit={async (values, form) => {
         try {
           await createTemplate({
-            ...values,
-            "CategoryId": category.CategoryId,
+            ...values
           });
           toast.success('Category has been created successfully.');
           modalClose();
@@ -89,10 +84,9 @@ import {
         />
         <Divider />
         <Form.Field.Select 
-          name="ProcedureList"
-          label="Procedure"
-          isMulti
-          options={procedureOptions}
+          name="CategoryId"
+          label="Category"
+          options={categoryOptions}
         />
 
         <Form.Field.Textarea
@@ -109,7 +103,7 @@ import {
         </Actions>
       </FormElement>
     </Form>
-     </Left>
+     </Full>
     </Content>
   </Fragment>
 

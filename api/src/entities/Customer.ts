@@ -21,7 +21,7 @@ class Customer extends BaseEntity implements IBaseEntityExtend {
     Name: [is.required(), is.maxLength(200)],
   };
 
-  PrimaryColumnName = "CustomerId";
+  PrimaryColumnName() { return  "CustomerId";}
 
   @PrimaryGeneratedColumn()
   CustomerId: number;

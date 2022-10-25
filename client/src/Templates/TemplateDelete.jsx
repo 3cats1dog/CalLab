@@ -7,14 +7,14 @@ import { Button, ConfirmModal } from 'shared/components';
 
 const propTypes = {
   template: PropTypes.object.isRequired,
-  modalClose: PropTypes.func.isRequired,
+  modalClose: PropTypes.func,
 };
 
 const TemplateDelete = ({ template,  modalClose }) => {
   const handleProcedureDelete = async () => {
     try {
       await api.delete(`/templates/${template.TemplateId}`);
-      modalClose();
+      if (modalClose) modalClose();
     } catch (error) {
       toast.error(error);
     }

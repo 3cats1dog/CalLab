@@ -25,7 +25,7 @@ class SubProcedure extends BaseEntity implements IBaseEntityExtend {
     ProcedureId:is.required(),
   };
 
-  PrimaryColumnName = "SubProcedureId";
+  PrimaryColumnName (){ return  "SubProcedureId";}
 
   @PrimaryGeneratedColumn()
   SubProcedureId: number;

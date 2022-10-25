@@ -29,7 +29,7 @@ class Template extends BaseEntity implements IBaseEntityExtend {
     CategoryId: is.required(),
   };
 
-  PrimaryColumnName = "TemplateId";
+  PrimaryColumnName (){ return  "TemplateId";}
 
   @PrimaryGeneratedColumn()
   TemplateId: number;

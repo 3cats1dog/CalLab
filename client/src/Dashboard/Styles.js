@@ -2,7 +2,7 @@ import styled from 'styled-components';
 
 import { sizes } from 'shared/utils/styles';
 
-const paddingLeft = sizes.appNavBarLeftWidth + sizes.secondarySideBarWidth + 40;
+const paddingLeft = sizes.dashBoardSideBarWidth +  40; //sizes.secondarySideBarWidth +
 
 export const DashboardPage = styled.div`
   padding: 25px 32px 50px ${paddingLeft}px;

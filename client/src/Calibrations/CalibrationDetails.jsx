@@ -4,7 +4,7 @@ import { get } from 'lodash';
 import useApi from 'shared/hooks/api';
 import  api from 'shared/utils/api';
 import { PageError, PageLoader, CopyLinkButton, Button, AboutTooltip } from 'shared/components';
-import { TopActions, TopActionsRight, Content, Left, Right,TopActionsLeft } from 'shared/components/Form/FormCommonStyle';
+import { TopActions, TopActionsRight, Content, Left, Right,TopActionsLeft, Full } from 'shared/components/Form/FormCommonStyle';
 import Delete from './CalibrationDetailDelete';
 import CalibrationForm from './CalibrationForm';
 
@@ -17,6 +17,9 @@ const CalibrationDetails = ({
   calibrationId,
   modalClose,
 }) => {
+
+  console.log(`CalibrationDetails: /calibrations/${calibrationId}`);
+
   const [{ data, error ,setLocalData }, fetchCalibration] = useApi.get(`/calibrations/${calibrationId}`,  { lazy: true });
   //if (!data) return <Loader />;
   if (error) return <PageError />;
@@ -36,13 +39,11 @@ const CalibrationDetails = ({
     });
   };
 
-  const handleLoad=()=>{
-
-  };
   const calibration = get(data, 'calibration' );
   if (!calibration) return <PageLoader />;
+
   return (
-    <Fragment onLoad={handleLoad}>
+    <Fragment>
       <TopActions>
         <TopActionsLeft>
         {`${calibration.customer?.Name} - ${calibration.instrument?.Name}/SN:${calibration.instrument?.SerialNo}`}
@@ -61,12 +62,12 @@ const CalibrationDetails = ({
         </TopActionsRight>
       </TopActions>
       <Content>
-        <Left>
+        <Full>
           <CalibrationForm
             calibration={calibration}
             updateCalibration={updateCalibration}
           />
-        </Left>
+        </Full>
       </Content>
     </Fragment>
   );

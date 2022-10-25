@@ -4,7 +4,7 @@ import { get } from 'lodash';
 import useApi from 'shared/hooks/api';
 import  api from 'shared/utils/api';
 import { PageError, PageLoader, CopyLinkButton, Button, AboutTooltip } from 'shared/components';
-import { TopActions, TopActionsRight, Content, Left, Right } from 'shared/components/Form/FormCommonStyle';
+import { TopActions, TopActionsRight, Content, Left, Right, Full } from 'shared/components/Form/FormCommonStyle';
 import Delete from './CustomerDetailsDelete';
 import CustomerForm from './CustomerForm';
 
@@ -55,12 +55,12 @@ const CustomerDetails = ({
         </TopActionsRight>
       </TopActions>
       <Content>
-        <Left>
+        <Full>
           <CustomerForm
             customer={customer}
             updateCustomer={updateCustomer}
           />
-        </Left>
+        </Full>
       </Content>
     </Fragment>
   );

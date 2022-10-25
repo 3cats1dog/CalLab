@@ -1,3 +1,5 @@
+import { Number } from "core-js";
+
 export const is = {
   match: (testFn, message = '') => (value, fieldValues) => !testFn(value, fieldValues) && message,
 
@@ -6,6 +8,10 @@ export const is = {
   minLength: min => value => !!value && value.length < min && `Must be at least ${min} characters`,
 
   maxLength: max => value => !!value && value.length > max && `Must be at most ${max} characters`,
+
+  number: () => value =>  !!value && !isNumber(value) && 'Must be numeric',
+
+  numeric: () => value => !!value && /^[-]?\d+$/.test(value) && 'Must be numeric',
 
   notEmptyArray: () => value =>
     Array.isArray(value) && value.length === 0 && 'Please add at least one item',
@@ -18,6 +24,14 @@ export const is = {
     !/^(?:http(s)?:\/\/)?[\w.-]+(?:\.[\w\.-]+)+[\w\-\._~:/?#[\]@!\$&'\(\)\*\+,;=.]+$/.test(value) &&
     'Must be a valid URL',
 };
+
+ 
+function isNumber(value) {  
+  value = value.replace(',','.');
+  let x = Number(value);
+  console.log( typeof value, value ,  typeof x , x, isNaN(x));
+  return !isNaN(x);
+} 
 
 const isNilOrEmptyString = value => value === undefined || value === null || value === '';
 

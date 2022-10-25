@@ -4,10 +4,17 @@ import { get } from 'lodash';
 import useApi from 'shared/hooks/api';
 import  api from 'shared/utils/api';
 import { PageError, PageLoader, CopyLinkButton, Button, AboutTooltip } from 'shared/components';
-import { TopActions, TopActionsRight, TopActionsLeft, Content, Left, Right } from 'shared/components/Form/FormCommonStyle';
+import { TopActions, TopActionsRight, TopActionsLeft, Content, Left, Right, Full } from 'shared/components/Form/FormCommonStyle';
 import Delete from './TemplateDelete';
 import TemplateForm from './TemplateForm';
 import DragDropForm from './TemplateDragDropForm';
+import TemplateDetailList from './TemplateDetailList';
+import TemplateAddStep from './TemplateAddStep';
+
+import DeleteDetail from './TemplateDetailDelete';
+import { render } from 'react-dom';
+
+
 const propTypes = {
   templateId: PropTypes.string.isRequired,
   modalClose: PropTypes.func,
@@ -17,9 +24,19 @@ const TemplateDetails = ({
   templateId,
   modalClose,
 }) => {
-  const [{ data, error ,setLocalData }, fetchTemplate] = useApi.get(`/templates/${templateId}`,  { lazy: true });
-  //if (!data) return <Loader />;
+  const [fetchTemplate] = useApi.get(`/templates/${templateId}`,  { lazy: true });
+  const [{ data, error ,setLocalData }, fetchDetails] = useApi.get(`/templateDetails/template/${templateId}`, { lazy:true});
+
+  const detailList=get(data,"details", []);
+  const template = get(fetchTemplate.data, 'template' );
+
+
   if (error) return <PageError />;
+
+  const updateDetailList=()=>
+  {
+      fetchDetails();
+  };
 
 
   const updateTemplateDetails = fields =>
@@ -36,7 +53,15 @@ const TemplateDetails = ({
     });
   };
 
-  const template = get(data, 'template' );
+  const deleteTemplateDetail = templateDetailId => {
+
+  };
+
+  const deleteTemplateDeleteByProcedure = ({templateId, procedureId}) => {
+
+  };
+
+
   if (!template) return <PageLoader />;
   return (
     <Fragment>
@@ -53,23 +78,34 @@ const TemplateDetails = ({
             )}
           />
           <CopyLinkButton variant="empty" />
-          {modalClose &&  <Delete template={template} modalClose={modalClose} />}
+          <Delete template={template} modalClose={modalClose} />
           {modalClose &&  <Button icon="close" iconSize={24} variant="empty" onClick={modalClose} />}
         </TopActionsRight>
       </TopActions>
       <Content>
-        <Left>
+        <Full>
           <TemplateForm
-            template={template}
-            updateTemplate={updateTemplate}
-          />
-        </Left>
-      </Content>
-      <Content>
-        <DragDropForm
-         categoryId={template.CategoryId}
-         templateId={template.TemplateId}
+              template={template}
+              updateTemplate={updateTemplate}
+            />
+        </Full>
+        </Content>
+        <Content>
+          <Full>
+            <TemplateAddStep 
+              templateId={templateId}
+              categoryId={template.CategoryId.toString()}
+              fetchDetail={updateDetailList}
+            />
+          </Full>
+        </Content>
+        <Content>
+        <Full>
+        <TemplateDetailList
+          detailList={detailList}
+          fetchDetail={updateDetailList}
         />
+        </Full>
       </Content>
     </Fragment>
   );

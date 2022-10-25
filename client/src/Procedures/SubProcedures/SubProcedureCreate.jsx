@@ -13,6 +13,7 @@ import { FormHeading,
   Content, Left, Right, 
   FormRow,
   FormElement_1_3,
+  Full,
 } from 'shared/components/Form/FormCommonStyle';
 import { PageError, PageLoader, CopyLinkButton, Button, AboutTooltip } from 'shared/components';
 import toast from 'shared/utils/toast';
@@ -54,7 +55,7 @@ const SubProcedureCreate = ({  modalClose, procedure }) => {
       </TopActionsRight>
     </TopActions>
     <Content>
-      <Left>
+      <Full>
       <Form
       enableReinitialize
       initialValues={{
@@ -141,7 +142,7 @@ const SubProcedureCreate = ({  modalClose, procedure }) => {
         </Actions>
       </FormElement>
     </Form>
-     </Left>
+     </Full>
     </Content>
   </Fragment>
 

@@ -2,7 +2,7 @@ import React, { Fragment } from 'react';
 import PropTypes from 'prop-types';
 import useApi from 'shared/hooks/api';
 
-import { TopActions, TopActionsRight, Content, Left, Right } from 'shared/components/Form/FormCommonStyle';
+import { TopActions, TopActionsRight, Content, Left, Right, Full } from 'shared/components/Form/FormCommonStyle';
 import { Form, CopyLinkButton, Button, AboutTooltip } from 'shared/components';
 import toast from 'shared/utils/toast';
 
@@ -40,7 +40,7 @@ const CategoryCreate = ({  modalClose }) => {
       </TopActionsRight>
     </TopActions>
     <Content>
-      <Left>
+      <Full>
       <Form
       enableReinitialize
       initialValues={{
@@ -79,7 +79,7 @@ const CategoryCreate = ({  modalClose }) => {
         </Actions>
       </FormElement>
     </Form>
-     </Left>
+     </Full>
     </Content>
   </Fragment>
 

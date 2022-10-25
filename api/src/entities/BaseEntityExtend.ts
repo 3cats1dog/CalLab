@@ -1,6 +1,6 @@
 
 interface IBaseEntityExtend   {
-  PrimaryColumnName:string;
+  PrimaryColumnName():string;
 }
 
 export default IBaseEntityExtend;

@@ -22,7 +22,7 @@ class LabInstrument extends BaseEntity implements IBaseEntityExtend {
     SerialNo: [is.required(), is.maxLength(200)],
   };
 
-  PrimaryColumnName = "LabInstrId";
+  PrimaryColumnName (){ return  "LabInstrId";}
 
   @PrimaryGeneratedColumn()
   LabInstrId: number;

@@ -33,10 +33,12 @@ const CategoryLists = ({ categorylist, filters, onSelected }) => {
     //const selectedRowsData = ids.map((id) => categorylist.find((row) => row.CategoryId === id));
     if ( isUndefined(ids)) return;
     if (ids.length==0) return;
-    console.log(ids[0]);
+    const categoryId=ids[0];
+    const selectedCategory = categorylist.find((row) => row.CategoryId === categoryId);
+    console.log(selectedCategory.CategoryId);
     if (onSelected)
     {
-      onSelected(ids[0].toString());
+      onSelected(selectedCategory);
     }
   };
 

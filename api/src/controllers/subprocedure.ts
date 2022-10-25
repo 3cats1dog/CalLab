@@ -18,7 +18,7 @@ export const getByProcedure = catchErrors(async (req, res) => {
     relations:["dataType"]
     });
   res.respond({ subprocedures });
-  console.log(`ProcedureId/${req.params.procedureId}, count ${subprocedures.length}`)
+  //console.log(`ProcedureId/${req.params.procedureId}, count ${subprocedures.length}`)
 });
 
 export const getSubProcedure = catchErrors(async (req, res) => {

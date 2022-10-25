@@ -20,7 +20,7 @@ class Comment extends BaseEntity implements IBaseEntityExtend {
 
   @PrimaryGeneratedColumn()
   id: number;
-  PrimaryColumnName = "id";
+  PrimaryColumnName() { return  "id";}
   
   @Column('text')
   body: string;

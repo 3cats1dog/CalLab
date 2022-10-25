@@ -10,7 +10,7 @@ import {
   JoinColumn,
 } from 'typeorm';
 
-import { IBaseEntityExtend, Calibration ,SubProcedure} from 'entities';
+import { IBaseEntityExtend, Calibration, Procedure ,SubProcedure} from 'entities';
 import is from 'utils/validation';
 /*
 CreateDateColumn,
@@ -22,15 +22,21 @@ import { CalibrationType, CalibrationStatus  } from 'constants/calibration';
 import { Procedure, Department, CustomerInstrument, Customer, Certicifate} from ".";
 */
 
-@Entity({ name: 'tbcalibrationsteps', schema: 'public' }  )
+@Entity({ name: 'tbcalibrationsteps', schema: 'public', orderBy: {
+  ProcedureId: "ASC",
+  SubProcedureId: "ASC",
+  Position: "ASC",
+},}  )
 class CalibrationStep extends BaseEntity implements IBaseEntityExtend {
   static validations = {
     CalibrationId: is.required(),
+    ProcedureId:is.required(),
     SubProcedureId: is.required(),
-    OrderNo: is.required(),
+    Position: is.required(),
+    NominalValue:is.required(),
   };
 
-  PrimaryColumnName = "StepId";
+  PrimaryColumnName() { return "StepId";}
 
   @PrimaryGeneratedColumn()
   StepId: number;
@@ -39,16 +45,40 @@ class CalibrationStep extends BaseEntity implements IBaseEntityExtend {
   CalibrationId: number;
 
   @Column('int')
+  ProcedureId: number;
+
+  @Column('int')
   SubProcedureId: number;
 
   @Column('int')
-  OrderNo: number;
+  Position: number;
+
+  @Column('float')
+  NominalValue: number;
+
+  @Column('int')
+  DataCount: number;
 
   @Column('text', { nullable: true })
   Description: string | null;
 
   @Column('text', { nullable: true })
   Remarks: string  | null;
+
+  @Column('int')
+  TotalCount: number;
+
+  @Column('float')
+  AverageValue: number;
+
+  @Column('float')
+  StandartDeviation: number;
+
+  @Column('float')
+  Error: number;
+
+  @Column('text')
+  Status: string;
 
 
   @ManyToOne(()=>Calibration, calibration => calibration.steps)
@@ -57,7 +87,11 @@ class CalibrationStep extends BaseEntity implements IBaseEntityExtend {
 
   @ManyToOne(()=>SubProcedure, subProcedure => subProcedure)
   @JoinColumn({ name: 'SubProcedureId' })
-  subProcedure:Calibration;
+  subProcedure:SubProcedure;
+
+  @ManyToOne(()=>Procedure, procedure => procedure)
+  @JoinColumn({ name: 'ProcedureId' })
+  procedure:Procedure;
 
   
   @BeforeInsert()

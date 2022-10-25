@@ -15,6 +15,21 @@ export const getByCategory = catchErrors(async (req, res) => {
   console.log(`GetProcedure, CategoryId/${req.params.categoryId}`)
 });
 
+
+export const getByCalibration = catchErrors(async (req, res) => {
+  let whereSQL = ' CategoryId in (select CategoryId 	from kallab.tbcustomerinstrument 	where InstrumentId in 		(select InstrumentId 		from kallab.tbcalibration 		where CalibrationId=:calibrationId)	) ';
+  const procedures = await Procedure.createQueryBuilder()
+  .select()
+  .where(whereSQL, { calibrationId: `${req.params.calibrationId}` })
+  .getMany();
+
+  res.respond({ procedures });
+
+  //console.log(`${req.params.calibrationId}` );
+});
+
+
+
 export const getProcedure = catchErrors(async (req, res) => {
   const { searchTerm } = req.query;
 

@@ -23,7 +23,7 @@ class DataType extends BaseEntity implements IBaseEntityExtend {
     ProcedureId:is.required(),
   };
 
-  PrimaryColumnName = "DataTypeId";
+  PrimaryColumnName(){ return  "DataTypeId";}
 
   @PrimaryGeneratedColumn()
   DataTypeId: number;

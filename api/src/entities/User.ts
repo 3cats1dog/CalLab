@@ -24,7 +24,7 @@ class User extends BaseEntity implements IBaseEntityExtend {
     Email: [is.required(), is.email(), is.maxLength(200)],
   };
 
-  PrimaryColumnName = "UserId";
+  PrimaryColumnName (){ return  "UserId";}
 
   @PrimaryGeneratedColumn()
   UserId: number;
