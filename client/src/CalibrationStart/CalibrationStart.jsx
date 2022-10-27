@@ -1,4 +1,4 @@
-import React, { Fragment, useEffect } from 'react';
+import React, { Fragment, useEffect, useState } from 'react';
 import PropTypes from 'prop-types';
 import { Route, useHistory, useParams, useRouteMatch } from 'react-router-dom';
 import useApi from 'shared/hooks/api';
@@ -28,10 +28,13 @@ const CalibrationStart = ({ calibrationId }) => {
   const match = useRouteMatch();
   const history = useHistory();
 
-  const [{ data ,error, isLoading }, fetchCalibrationSteps] = useApi.get(`/steps/calibration/${calibrationId}`);
+  //const [calibration, setCalibration] =useState(null);
 
+  const [{ data ,error, isLoading }, fetchCalibrationSteps] = useApi.get(`/steps/calibration/${calibrationId}`);
   const [fetchCalibration] = useApi.get(`/calibrations/${calibrationId}`);
-  const calibration=get(fetchCalibration.data, 'calibration');
+  const calibration = get(fetchCalibration.data, 'calibration');
+  const [calibrationStatus, setStatus] =useState(`${calibration?.Status}`);
+
 
   const [filters, mergeFilters] = useMergeState(defaultFilters);
 
@@ -47,11 +50,12 @@ const CalibrationStart = ({ calibrationId }) => {
   const stepList = get(data, 'steps', []);
 
   useEffect(() => {
-    history.listen((location) => {
-        console.log(`You changed the page to: ${location.pathname}`)
-    })
+    history.listen((location) => { console.log(`You changed the page to: ${location.pathname}`) });
   }, [history])
 
+  const fetchCalibrationStatus=(status) => {
+    setStatus(status);
+  }
 
   const findNextStep =(step) => {
     var currIndex = stepList.findIndex(s => s.StepId === step.StepId);
@@ -73,6 +77,7 @@ const CalibrationStart = ({ calibrationId }) => {
       <Container fluid="md">
           <WorkTopbar
               calibration={calibration}
+              fetchCalibrationStatus={fetchCalibrationStatus}
           />
         <Row style={firstRowStyle}>
           <Col lg={3} >
@@ -96,7 +101,7 @@ const CalibrationStart = ({ calibrationId }) => {
           stepList={stepList}
           filters={filters}
           initialLoadingState={isLoading}
-          status={calibration.Status}
+          status={calibrationStatus}
           fetchSteps={onModalClose}
         />
       </Container>

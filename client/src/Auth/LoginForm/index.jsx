@@ -6,7 +6,7 @@ import toast from 'shared/utils/toast';
 import api from 'shared/utils/api';
 import { getStoredAuthToken, storeAuthToken, removeStoredAuthToken } from 'shared/utils/authToken';
 
-import { FormCont, FormElement } from "./Styles";
+import { ActionButton, Actions, FormCont, FormElement } from "./Styles";
 
 const propTypes = {
   logout:PropTypes.bool,
@@ -49,11 +49,13 @@ const LoginForm =({logout, setIsLogin})=>{
     >
         <FormCont>
         <FormElement>
-          <Form.Field.Input name="name" label="User Name" placeholder={"User Name"}  />
-          <Form.Field.Input name="password" label="Password" type={"password"} placeholder={"Password"}/>
-          <Button type="submit" variant="primary">
-            Login
-          </Button>
+          <Form.Field.Input name="name" label="User Name" placeholder={"User Name"} tip={"UserName:demo"}  />
+          <Form.Field.Input name="password" label="Password" type={"password"} placeholder={"Password"} tip={"Password:1234"} />
+          <Actions>
+            <ActionButton type="submit" variant="primary">
+                Login
+            </ActionButton>
+          </Actions>
         </FormElement>
         </FormCont>
     </Form>

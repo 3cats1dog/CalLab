@@ -1,4 +1,4 @@
-import React, { Fragment } from 'react';
+import React, { Fragment, useEffect, useState } from 'react';
 import { useRouteMatch, useHistory } from 'react-router-dom';
 import PropTypes from 'prop-types';
 
@@ -56,10 +56,17 @@ const propTypes = {
   stepList:PropTypes.array.isRequired,
   initialLoadingState:PropTypes.bool.isRequired,
   filters: PropTypes.object.isRequired,
-  status: PropTypes.string.isRequired,
+  status: PropTypes.string,
   fetchSteps:PropTypes.func.isRequired,
 };
 
+const defaultTypes={
+  stepList:[],
+  initialLoadingState: false,
+  filters: {},
+  status: CalibrationStatus.WAITEDIT,
+  fetchSteps:undefined,
+}
 
 const WorkStepList = ({ stepList, initialLoadingState, filters, status, fetchSteps }) => {
   const {searchTerm} = filters;
@@ -74,9 +81,24 @@ const WorkStepList = ({ stepList, initialLoadingState, filters, status, fetchSte
     setLoading(initialLoadingState);
   }, [initialLoadingState]);
 
+  let columnsCopy =[];
+  /*
+  useEffect(()=>
+  {
+    //rearrange columns;
+    ReArrangeColumn();
+
+  },[status]);
+  */
+
+  const ReArrangeColumn=()=> {
+
+  columnsCopy = [...columns];
   if (columns.length==11)
   {
-    let isEdit = status ==CalibrationStatus.WAITEDIT;
+    let isEdit=true;
+    if (status){  isEdit = (status == CalibrationStatus.WAITEDIT);}
+    
     const clickColumn =
     {
       field: 'action',
@@ -104,8 +126,12 @@ const WorkStepList = ({ stepList, initialLoadingState, filters, status, fetchSte
           );
       },
     };
-    columns.unshift(clickColumn);
+    columnsCopy.unshift(clickColumn);
+    
   }
+  };
+
+  ReArrangeColumn();
 
   columns.find(x=> x.field == "NominalValue").renderCell =(params) => {
       return <div className='rowitem'>{engineeringNotation(params.row?.NominalValue, 0, 1)}</div>
@@ -186,7 +212,7 @@ columns.find(x => x.field === 'Status').cellClassName =(params) => {
     >
       <DataGrid 
       rows={xList}
-      columns={columns}
+      columns={columnsCopy}
       pageSize={20}
       getRowId={(row) => row.StepId}
       rowsPerPageOptions={[20]}
@@ -206,5 +232,6 @@ columns.find(x => x.field === 'Status').cellClassName =(params) => {
 };
 
 WorkStepList.propTypes = propTypes;
+WorkStepList.defaultTypes=defaultTypes;
 
 export default WorkStepList;

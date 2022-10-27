@@ -55,9 +55,9 @@ export const CalibrationType = {
   };
   
   export const CalibrationTypeCopy = {
-    [CalibrationType.TASK]: 'Task',
-    [CalibrationType.BUG]: 'Bug',
-    [CalibrationType.STORY]: 'Story',
+    [CalibrationType.TASK]: 'As Is',
+    [CalibrationType.BUG]: 'With Repair',
+    [CalibrationType.STORY]: 'On Location',
   };
   
   export const CalibrationStatusCopy = {

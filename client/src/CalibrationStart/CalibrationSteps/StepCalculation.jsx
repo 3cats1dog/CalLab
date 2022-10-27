@@ -121,7 +121,13 @@ return (
             <li></li>
         </ul>
 </div>
-{step.Status == StepStatusType.PASSED && <Button onClick={onHandleNextStep}>Next Step</Button>}     
+{step.Status == StepStatusType.PASSED && 
+<Actions>
+  <ActionButton onClick={onHandleNextStep}  variant="primary">
+    Next Step
+  </ActionButton>
+</Actions>
+}     
 </Fragment>    
 )
 };

@@ -24,10 +24,11 @@ import {
 
 const propTypes = {
   calibration: PropTypes.object.isRequired,
+  fetchCalibrationStatus:PropTypes.func.isRequired,
 };
 
 
-const WorkTopbar = ({calibration}) => {
+const WorkTopbar = ({calibration, fetchCalibrationStatus}) => {
 
   const renderLinkItem = ( text, iconType, path) => {
     const isImplemented = !!path;
@@ -54,7 +55,8 @@ const WorkTopbar = ({calibration}) => {
       {
         calibration.Status=path;
         updateCalibration({"Status":path});
-        window.location.reload(); 
+        fetchCalibrationStatus(path);
+        //window.location.reload(); 
       }
     }
   };

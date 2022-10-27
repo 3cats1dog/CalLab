@@ -5,7 +5,7 @@ import { createEntity,validateAndSaveEntity } from 'utils/typeorm';
 
 export const login =catchErrors(async (req, res)=> {
 const {name, password } = req.body;
-const user =await User.findOne({ where: { Name: name, Password: password}});
+const user =await User.findOne({ where: { UserName: name, Password: password}});
 
 if (user != null)
 {
@@ -20,16 +20,6 @@ if (user != null)
 }
 
 console.log("name is " + name + "\r\n" );
-
-/*
-console.log("name is " + name + "\r\n" );
-let whereSQL = 'Name= :name';
-const sql1 = await User
-.createQueryBuilder("tbUser")
-.where(whereSQL, { name:  `${name}`})
-.getSql();
-console.log(sql1);
-*/
 });
 
 export const getUserWithID = catchErrors(async (req, res) => {
